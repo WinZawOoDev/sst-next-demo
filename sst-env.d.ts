@@ -5,9 +5,13 @@
 
 declare module "sst" {
   export interface Resource {
-    "sst-next-demo": {
+    "premium-banking-demo-next-demo": {
       "type": "sst.aws.Nextjs"
       "url": string
+    }
+    "premium-banking-next-demo": {
+      "name": string
+      "type": "sst.aws.Bucket"
     }
   }
 }
