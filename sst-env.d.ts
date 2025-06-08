@@ -13,6 +13,10 @@ declare module "sst" {
       "name": string
       "type": "sst.aws.Bucket"
     }
+    "sst-next-demo": {
+      "name": string
+      "type": "sst.aws.Bucket"
+    }
   }
 }
 /// <reference path="sst-env.d.ts" />

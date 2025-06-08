@@ -11,15 +11,15 @@ export default $config({
   },
   async run() {
 
-    const bucket = new sst.aws.Bucket("sst-next-demo");
+    const bucket = new sst.aws.Bucket("sst-next-demo-bucket");
 
-    new sst.aws.Nextjs("sst-next-demo", {
+    new sst.aws.Nextjs("sst-next-demo-app", {
       link: [bucket],
-      imageOptimization:{
-        memory:"512 MB",
+      imageOptimization: {
+        memory: "512 MB",
         staticEtag: true
       },
-      invalidation:{
+      invalidation: {
         paths: "all",
         wait: true,
       }
