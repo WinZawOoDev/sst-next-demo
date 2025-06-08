@@ -10,6 +10,12 @@ export default $config({
     };
   },
   async run() {
-    new sst.aws.Nextjs("sst-next-demo");
+
+    const bucket = new sst.aws.Bucket("premium-banking-next-demo");
+
+    new sst.aws.Nextjs("premium-banking-demo-next-demo", {
+      link: [bucket]
+    });
+    
   },
 });
