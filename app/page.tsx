@@ -1,18 +1,28 @@
+import { getArticles } from "@/services/spaceflight";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+
+  await getArticles()
+
+
   return (
-    <main className="grid grid-cols-2 gap-16 min-h-screen mx-52 px-28 pb-20  sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <BlogCard />
-      <BlogCard />
-      <BlogCard />
-      <BlogCard />
+    <main className="min-h-screen mx-52 pb-14 sm:p-14 font-[family-name:var(--font-geist-sans)]">
+      <div className="mb-5">
+        <h1 className="text-4xl font-semibold text-gray-700">Space Flight Articles</h1>
+      </div>
+      <div className="grid grid-cols-2 gap-16">
+        <Article />
+        <Article />
+        <Article />
+        <Article />
+      </div>
     </main>
   );
 }
 
 
-function BlogCard() {
+function Article() {
   return (
     <section className="relative max-w-min-2xl rounded-md bg-white">
       <div className="bg-gray-100 w-full min-h-[15em] items-center flex justify-center">
