@@ -36,15 +36,18 @@ function Article(props: SpaceArticle) {
       </div>
       <div className="relative min-h-[7em] w-full mx-auto">
         <div className="my-0.5">
-          <h4 className="block font-semibold text-xl pb-1 pt-2.5">{props.title}</h4>
-          <div className="text-sm font-semibold text-gray-500">
-            {props.authors.map((author, index) => (
-              <span key={index + Math.random()} className="text-gray-800">{author.name}</span>
-            ))}
-            <span className="pl-1.5 text-gray-900">{format(props.published_at, 'P')}</span>
+          <h4 className="block font-semibold text-xl pb-1 pt-2.5 underline underline-offset-4 decoration-1 cursor-pointer">{props.title}</h4>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-semibold text-gray-500">
+              {props.authors.map((author, index) => (
+                <span key={index + Math.random()} className="text-gray-800">{author.name}</span>
+              ))}
+              <span className="pl-1.5 text-gray-900 italic">{format(props.published_at, 'P')}</span>
+            </div>
+            <span className="block text-xs font-light text-gray-950"># {props.news_site}</span>
           </div>
         </div>
-        <div className="my-2">
+        <div className="my-2.5">
           <p className="line-clamp-3 text-center text-gray-700 max-w-2xl text-sm">
             {props.summary}
           </p>
