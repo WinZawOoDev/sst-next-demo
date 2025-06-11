@@ -7,9 +7,10 @@ export async function getArticles(): Promise<SpaceFlightResponse | null> {
         const res = axios.get('articles', {
             baseURL: baseUrl,
             params: {
-                limit: 5,
+                limit: 6,
                 offset: 1,
-            }
+            },
+            timeout: 50000
         });
         const articles = (await res).data as SpaceFlightResponse;
         return articles;

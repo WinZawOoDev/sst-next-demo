@@ -1,46 +1,53 @@
 import { getArticles } from "@/services/spaceflight";
 import Image from "next/image";
+import { format } from "date-fns"
 
 export default async function Home() {
 
-  await getArticles()
-
+  const articles = await getArticles()
+  console.log("🚀 ~ Home ~ articles:", articles)
 
   return (
     <main className="min-h-screen mx-52 pb-14 sm:p-14 font-[family-name:var(--font-geist-sans)]">
-      <div className="mb-5">
+      <div className="mb-7">
         <h1 className="text-4xl font-semibold text-gray-700">Space Flight Articles</h1>
       </div>
       <div className="grid grid-cols-2 gap-16">
-        <Article />
-        <Article />
-        <Article />
-        <Article />
+        {articles?.results.map(article => (
+          <Article key={article.id} {...article} />
+        ))}
       </div>
     </main>
   );
 }
 
 
-function Article() {
+function Article(props: SpaceArticle) {
   return (
-    <section className="relative max-w-min-2xl rounded-md bg-white">
-      <div className="bg-gray-100 w-full min-h-[15em] items-center flex justify-center">
-        <span className="font-thin text-gray-500">Image</span>
+    <section className="relative max-w-min-2xl rounded-xs bg-white">
+      <div className="w-full min-h-max-[10em] items-center flex justify-center mb-2">
+        <Image
+          src={props.image_url || '/placeholder.png'}
+          alt={props.title}
+          width={400}
+          height={300}
+          className="w-4xl max-h-[20em] h-[25em] object-cover rounded-t-md"
+        />
       </div>
-      <div className="relative flex items-center min-h-[7em] w-full mx-auto ">
-        <p className="line-clamp-3 text-center text-gray-700 max-w-2xl text-sm p-4">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, nisi. Voluptatum omnis, qui in nostrum asperiores cupiditate necessitatibus commodi consequatur temporibus laboriosam reprehenderit hic culpa illum reiciendis aliquam officiis quam!
-        </p>
-      </div>
-      <div className="relative w-full p-4">
-        <div className="w-fit text-gray-600 text-sm">
-          <span className="text-xs">Author:</span>
-          <span className="font-semibold text-gray-700 text-xs"> John Doe</span>
+      <div className="relative min-h-[7em] w-full mx-auto">
+        <div className="my-0.5">
+          <h4 className="block font-semibold text-xl pb-1 pt-2.5">{props.title}</h4>
+          <div className="text-sm font-semibold text-gray-500">
+            {props.authors.map((author, index) => (
+              <span key={index + Math.random()} className="text-gray-800">{author.name}</span>
+            ))}
+            <span className="pl-1.5 text-gray-900">{format(props.published_at, 'P')}</span>
+          </div>
         </div>
-        <div className="w-fit text-gray-600 text-sm">
-          <span className="text-xs">Date:</span>
-          <span className="font-semibold text-gray-700 text-xs"> 2023-10-01</span>
+        <div className="my-2">
+          <p className="line-clamp-3 text-center text-gray-700 max-w-2xl text-sm">
+            {props.summary}
+          </p>
         </div>
       </div>
     </section>
