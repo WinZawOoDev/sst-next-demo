@@ -20,3 +20,17 @@ export async function getArticles(): Promise<SpaceFlightResponse | null> {
     }
 
 }
+
+export async function getArticleById(id: number): Promise<SpaceArticle | null> {
+    try {
+        const res = axios.get(`articles/${id}`, {
+            baseURL: baseUrl,
+            timeout: 50000
+        });
+        const article = (await res).data as SpaceArticle;
+        return article;
+    } catch (error) {
+        console.log("🚀 ~ getArticleById ~ error:", error)
+        return null;
+    }
+}

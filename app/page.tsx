@@ -1,14 +1,14 @@
 import { getArticles } from "@/services/spaceflight";
 import Image from "next/image";
 import { format } from "date-fns"
+import Link from "next/link";
 
 export default async function Home() {
 
   const articles = await getArticles()
-  console.log("🚀 ~ Home ~ articles:", articles)
 
   return (
-    <main className="min-h-screen mx-52 pb-14 sm:p-14 font-[family-name:var(--font-geist-sans)]">
+    <>
       <div className="mb-7">
         <h1 className="text-4xl font-semibold text-gray-700">Space Flight Articles</h1>
       </div>
@@ -17,7 +17,7 @@ export default async function Home() {
           <Article key={article.id} {...article} />
         ))}
       </div>
-    </main>
+    </>
   );
 }
 
@@ -36,7 +36,9 @@ function Article(props: SpaceArticle) {
       </div>
       <div className="relative min-h-[7em] w-full mx-auto">
         <div className="my-0.5">
-          <h4 className="block font-semibold text-xl pb-1 pt-2.5 underline underline-offset-4 decoration-1 cursor-pointer">{props.title}</h4>
+          <Link href={`/${props.id}`} className="no-underline">
+            <h4 className="block font-semibold text-xl pb-1 pt-2.5 underline underline-offset-4 decoration-1 cursor-pointer">{props.title}</h4>
+          </Link>
           <div className="flex items-center justify-between">
             <div className="text-sm font-semibold text-gray-500">
               {props.authors.map((author, index) => (
